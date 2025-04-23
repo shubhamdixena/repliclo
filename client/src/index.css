@@ -6,10 +6,38 @@
 
 @font-face {
   font-family: 'Kazimir';
-  src: url('https://cdn.fontshare.com/wf/JHGLOTZP4YVBTP6CCFHQKDJ634RWUBG2/MZRXRXKJJFMDXXKRKMDTFTVJZ4YFYGNM/QOEPKGKL42VTXFCZVPZ3FZSP6JYEQXBK.woff2') format('woff2'),
-       url('https://cdn.fontshare.com/wf/JHGLOTZP4YVBTP6CCFHQKDJ634RWUBG2/MZRXRXKJJFMDXXKRKMDTFTVJZ4YFYGNM/QOEPKGKL42VTXFCZVPZ3FZSP6JYEQXBK.woff') format('woff');
+  src: url('https://assets.website-files.com/5c5b09b82f637d3c5c02003a/5c5b09b82f637d02fd020063_KazimirText-Book.woff2') format('woff2'),
+       url('https://assets.website-files.com/5c5b09b82f637d3c5c02003a/5c5b09b82f637d2066020064_KazimirText-Book.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kazimir';
+  src: url('https://assets.website-files.com/5c5b09b82f637d3c5c02003a/5c5b09b82f637d6afd02005d_KazimirText-Bold.woff2') format('woff2'),
+       url('https://assets.website-files.com/5c5b09b82f637d3c5c02003a/5c5b09b82f637dd3e702005e_KazimirText-Bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('https://assets.website-files.com/5c5b09b82f637d3c5c02003a/5c5b09b82f637d23e5020067_ProximaNova-Regular.woff2') format('woff2'),
+       url('https://assets.website-files.com/5c5b09b82f637d3c5c02003a/5c5b09b82f637d1f5002006a_ProximaNova-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('https://assets.website-files.com/5c5b09b82f637d3c5c02003a/5c5b09b82f637d66b3020065_ProximaNova-Bold.woff2') format('woff2'),
+       url('https://assets.website-files.com/5c5b09b82f637d3c5c02003a/5c5b09b82f637d0cb0020068_ProximaNova-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 :root {
@@ -99,5 +127,5 @@
 }
 
 .font-proxima {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Proxima Nova', 'Montserrat', sans-serif;
 }

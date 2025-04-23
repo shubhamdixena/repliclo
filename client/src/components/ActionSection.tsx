@@ -3,10 +3,10 @@ import { Link } from 'wouter';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Import the provided assets
-const joinMonthlyImage = "/attached_assets/assets_2fe4147bb8c843bb8ebba475c8973899_454f9ac0ec2d4d8d943786cc109b59a4.png";
-const legacyGivingImage = "/attached_assets/assets_2fe4147bb8c843bb8ebba475c8973899_2145c4221b334fc6a55b338abf12d45f.png";
-const giveFundraiserImage = "/attached_assets/assets_2fe4147bb8c843bb8ebba475c8973899_a7a3785051b74859bd50e10adbf983b9.png";
-const startFundraiserImage = "/attached_assets/assets_2fe4147bb8c843bb8ebba475c8973899_cbcc89b46e664c09a63f4fc16c6384b5.png";
+const joinMonthlyImage = "/assets/assets_2fe4147bb8c843bb8ebba475c8973899_454f9ac0ec2d4d8d943786cc109b59a4.png";
+const legacyGivingImage = "/assets/assets_2fe4147bb8c843bb8ebba475c8973899_2145c4221b334fc6a55b338abf12d45f.png";
+const giveFundraiserImage = "/assets/assets_2fe4147bb8c843bb8ebba475c8973899_a7a3785051b74859bd50e10adbf983b9.png";
+const startFundraiserImage = "/assets/assets_2fe4147bb8c843bb8ebba475c8973899_cbcc89b46e664c09a63f4fc16c6384b5.png";
 
 interface ActionCardProps {
   image: string;
@@ -16,7 +16,7 @@ interface ActionCardProps {
 }
 
 const ActionCard = ({ image, title, icon, description }: ActionCardProps) => (
-  <div className="relative rounded-lg overflow-hidden h-[400px] group">
+  <div className="relative rounded-lg overflow-hidden h-[380px] shadow-lg group transition-transform hover:scale-[1.02] duration-300">
     <img src={image} alt={title} className="w-full h-full object-cover" />
     
     {description ? (
@@ -30,10 +30,10 @@ const ActionCard = ({ image, title, icon, description }: ActionCardProps) => (
     ) : (
       <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
         <div className="flex items-center">
-          <div className="bg-charity-yellow rounded-full p-2 mr-3">
-            <img src={icon} alt="" className="w-5 h-5" />
+          <div className="bg-charity-yellow rounded-full p-2 mr-3 flex items-center justify-center">
+            <div className="text-[18px]">{icon}</div>
           </div>
-          <span className="text-white uppercase font-bold tracking-wider">{title}</span>
+          <span className="text-white uppercase text-sm font-bold tracking-wider">{title}</span>
         </div>
       </div>
     )}
@@ -55,34 +55,34 @@ const ActionSection = () => {
   return (
     <section className="py-20 bg-[#FBF7EE]">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-8">
-          <h2 className="font-kazimir text-4xl font-bold mb-4">Ready to take action?</h2>
-          <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="font-kazimir text-4xl md:text-5xl font-bold mb-4">Ready to take action?</h2>
+          <p className="text-gray-700 text-lg max-w-2xl mx-auto">
             There are lots of great ways to help us end the global water crisis.
             Take action today, and change lives.
           </p>
         </div>
         
-        <div className="relative">
+        <div className="relative px-6">
           <div className="overflow-hidden">
             <div 
               className="flex transition-transform duration-500 ease-in-out"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
-              {/* First slide */}
+              {/* First slide - matching reference image exactly */}
               <div className="w-full flex-shrink-0">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                   <ActionCard 
                     image={joinMonthlyImage}
                     title="JOIN MONTHLY GIVING"
-                    icon="🚰"
+                    icon="💧"
                   />
-                  <div className="bg-gray-900 rounded-lg p-8 flex flex-col justify-center">
+                  <div className="bg-gray-900 rounded-lg shadow-lg p-8 flex flex-col justify-center h-[380px]">
                     <h3 className="text-white text-xl font-bold mb-4">Start a fundraiser</h3>
-                    <p className="text-gray-300 mb-6">
+                    <p className="text-gray-300 mb-8">
                       Support clean water projects by raising funds for people in need.
                     </p>
-                    <button className="px-6 py-3 bg-charity-yellow text-charity-black font-bold rounded">
+                    <button className="px-6 py-3 bg-charity-yellow text-charity-black text-sm font-bold rounded">
                       GET STARTED
                     </button>
                   </div>
@@ -101,7 +101,7 @@ const ActionSection = () => {
               
               {/* Second slide */}
               <div className="w-full flex-shrink-0">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                   <ActionCard 
                     image={startFundraiserImage}
                     title="START A FUNDRAISER"
@@ -118,12 +118,12 @@ const ActionSection = () => {
                     title="DONATE ONCE"
                     icon="💰"
                   />
-                  <div className="bg-charity-teal rounded-lg p-8 flex flex-col justify-center text-white">
+                  <div className="bg-charity-teal rounded-lg shadow-lg p-8 flex flex-col justify-center text-white h-[380px]">
                     <h3 className="text-xl font-bold mb-4">Join The Spring</h3>
-                    <p className="mb-6">
+                    <p className="mb-8">
                       Be part of our monthly giving community changing thousands of lives each month.
                     </p>
-                    <button className="px-6 py-3 bg-white text-charity-teal font-bold rounded">
+                    <button className="px-6 py-3 bg-white text-charity-teal text-sm font-bold rounded">
                       LEARN MORE
                     </button>
                   </div>
@@ -132,36 +132,37 @@ const ActionSection = () => {
             </div>
           </div>
           
-          {/* Navigation dots */}
-          <div className="flex justify-center mt-6 space-x-2">
-            {Array.from({ length: totalSlides }).map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentSlide(i)}
-                className={`w-2 h-2 rounded-full ${
-                  i === currentSlide ? 'bg-charity-black' : 'bg-gray-300'
-                }`}
-                aria-label={`Go to slide ${i + 1}`}
-              />
-            ))}
+          {/* Navigation controls - matching reference image */}
+          <div className="flex justify-center mt-8 space-x-6 items-center">
+            <button
+              onClick={prevSlide}
+              className="text-gray-600 hover:text-gray-900 focus:outline-none"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+          
+            <div className="flex space-x-2">
+              {Array.from({ length: totalSlides }).map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentSlide(i)}
+                  className={`w-2 h-2 rounded-full transition-colors ${
+                    i === currentSlide ? 'bg-charity-black' : 'bg-gray-300'
+                  }`}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
+              ))}
+            </div>
+            
+            <button
+              onClick={nextSlide}
+              className="text-gray-600 hover:text-gray-900 focus:outline-none"
+              aria-label="Next slide"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
           </div>
-          
-          {/* Navigation arrows */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 bg-white rounded-full p-2 shadow-md"
-            aria-label="Previous slide"
-          >
-            <ChevronLeft className="h-6 w-6" />
-          </button>
-          
-          <button
-            onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 bg-white rounded-full p-2 shadow-md"
-            aria-label="Next slide"
-          >
-            <ChevronRight className="h-6 w-6" />
-          </button>
         </div>
       </div>
     </section>

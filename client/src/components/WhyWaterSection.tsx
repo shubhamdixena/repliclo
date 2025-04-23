@@ -14,7 +14,7 @@ const WhyWaterSection = () => {
         
         <div className="max-w-5xl mx-auto mb-12 relative rounded-lg overflow-hidden">
           <img 
-            src="/attached_assets/assets_2fe4147bb8c843bb8ebba475c8973899_c5aa1dfb86c24d98a0cf079d40f26c01.webp" 
+            src="/assets/assets_2fe4147bb8c843bb8ebba475c8973899_c5aa1dfb86c24d98a0cf079d40f26c01.webp" 
             alt="Woman accessing clean water" 
             className="w-full object-cover rounded-lg" 
           />

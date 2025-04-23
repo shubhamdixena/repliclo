@@ -5,7 +5,7 @@ const HeroSection = () => {
     <section className="relative bg-charity-teal">
       <div className="absolute inset-0 z-10">
         <img 
-          src="/attached_assets/84223d6a-fb5b-41d2-80a7-355935c72d78.png" 
+          src="/assets/84223d6a-fb5b-41d2-80a7-355935c72d78.png" 
           alt="Child drinking clean water" 
           className="w-full h-full object-cover"
         />
