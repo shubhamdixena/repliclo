@@ -81,6 +81,9 @@ const Header = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem>
+                  <Link href="/about">About Us</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
                   <Link href="#">Our Work</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
@@ -147,6 +150,7 @@ const Header = () => {
             <div className="block px-3 py-2 text-sm font-medium text-gray-800">TAKE ACTION</div>
             <div className="block px-3 py-2 text-sm font-medium text-gray-800">GET INVOLVED</div>
             <div className="block px-3 py-2 text-sm font-medium text-gray-800">GET TO KNOW US</div>
+            <Link href="/about" className="block px-6 py-2 text-sm font-medium text-gray-600 pl-6">About Us</Link>
             <div className="block px-3 py-2 text-sm font-medium text-gray-800">WHY WATER?</div>
           </div>
         </div>
