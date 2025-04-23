@@ -1,6 +1,7 @@
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
+import "./styles/fonts.css";
 
 document.head.insertAdjacentHTML('beforeend', `
   <meta name="description" content="charity: water is a non-profit organization bringing clean and safe drinking water to people in developing countries.">

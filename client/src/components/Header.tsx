@@ -7,9 +7,16 @@ import {
   DropdownMenuItem 
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { signOut } from "@/lib/supabase";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white shadow-sm">
@@ -123,17 +130,33 @@ const Header = () => {
           </div>
         </nav>
         
-        <div className="flex items-center">
+        <div className="flex items-center space-x-4">
           <Link 
             href="#" 
-            className="ml-4 px-4 py-1.5 bg-charity-yellow text-charity-black text-xs font-bold rounded-full"
+            className="px-4 py-1.5 bg-charity-yellow text-charity-black text-xs font-bold rounded-full"
           >
             GIVE
           </Link>
           
+          {user ? (
+            <button
+              onClick={handleSignOut}
+              className="px-4 py-1.5 bg-gray-100 text-gray-800 hover:bg-gray-200 text-xs font-bold rounded-full"
+            >
+              SIGN OUT
+            </button>
+          ) : (
+            <Link
+              href="/login"
+              className="px-4 py-1.5 bg-gray-100 text-gray-800 hover:bg-gray-200 text-xs font-bold rounded-full"
+            >
+              LOGIN
+            </Link>
+          )}
+          
           {/* Mobile menu button */}
           <button 
-            className="ml-4 md:hidden"
+            className="md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -152,6 +175,21 @@ const Header = () => {
             <div className="block px-3 py-2 text-sm font-medium text-gray-800">GET TO KNOW US</div>
             <Link href="/about" className="block px-6 py-2 text-sm font-medium text-gray-600 pl-6">About Us</Link>
             <div className="block px-3 py-2 text-sm font-medium text-gray-800">WHY WATER?</div>
+            {user ? (
+              <button
+                onClick={handleSignOut}
+                className="block w-full text-left px-3 py-2 text-sm font-medium text-gray-800"
+              >
+                SIGN OUT
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                className="block px-3 py-2 text-sm font-medium text-gray-800"
+              >
+                LOGIN
+              </Link>
+            )}
           </div>
         </div>
       )}

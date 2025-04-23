@@ -4,6 +4,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Base font configuration */
+@layer base {
+  html {
+    font-family: 'Proxima Nova', system-ui, sans-serif;
+  }
+}
+
 @font-face {
   font-family: 'Kazimir';
   src: url('https://assets.website-files.com/5c5b09b82f637d3c5c02003a/5c5b09b82f637d02fd020063_KazimirText-Book.woff2') format('woff2'),
@@ -105,6 +112,7 @@
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-kazimir;
+    font-weight: 400 !important;
   }
 }
 

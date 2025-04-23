@@ -3,6 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import ImpactSection from "@/components/ImpactSection";
 import WhyWaterSection from "@/components/WhyWaterSection";
 import ActionSection from "@/components/ActionSection";
+import PrepTalkSection from "@/components/PrepTalkSection";
 import Footer from "@/components/Footer";
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
         <HeroSection />
         <ImpactSection />
         <WhyWaterSection />
+        <PrepTalkSection />
         <ActionSection />
       </main>
       <Footer />
