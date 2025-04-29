@@ -5,9 +5,14 @@ const HeroSection = () => {
     <section className="relative bg-charity-teal min-h-[90vh]">
       <div className="absolute inset-0 z-10">
         <img 
-          src="/assets/assets_2fe4147bb8c843bb8ebba475c8973899_4e8172a8fa9b4a8cb8432ed6b9fcb0bb.jpeg" 
-          alt="Child drinking clean water" 
-          className="w-full h-full object-cover"
+          src="/assets/hero-image-mobile.jpeg"
+          alt="Clean water initiative" 
+          className="w-full h-full object-cover md:hidden"
+        />
+        <img 
+          src="/assets/hero-image.jpeg" 
+          alt="Clean water initiative" 
+          className="hidden md:block w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black opacity-40"></div>
       </div>

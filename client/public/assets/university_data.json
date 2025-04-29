@@ -1,0 +1,131 @@
+[
+  {
+    "universityName": "Harvard University",
+    "data": {
+      "University": "Harvard University",
+      "Location": "USA",
+      "Program": "MBA",
+      "Intake": "September, January",
+      "Duration": "21 Months",
+      "Tuition Fees": "USD 106,598",
+      "GMAT/GRE Waiver": "No",
+      "Recommended Scores": {
+        "Recommended GMAT": 683,
+        "Recommended GRE": 392
+      },
+      "Eligibility": "Minimum 2 years of work experience, Bachelor's degree with minimum GPA of 3.0",
+      "Eligibility URL": "https://www.harvard.edu/programs/mba/admissions/eligibility",
+      "Class Profile": {
+        "Average Work Experience": "2 Years",
+        "Average GRE Score": 320,
+        "Average GPA": "3.78",
+        "Average GMAT Score": 683,
+        "Average Age": 26
+      },
+      "Class Profile URL": "https://www.harvard.edu/programs/mba/class-profile",
+      "Employment Statistics": {
+        "Consulting": "$101097",
+        "Finance": "$89302",
+        "Marketing": "$101623",
+        "Information Technology": "$106173",
+        "Average Salary (in $)": "$99548",
+        "ROI (3 years avg. salary/Total tuition fee)": "280%"
+      },
+      "Deadlines": "Round 1: October 13, Round 2: January 7, Round 3: March 14",
+      "Application Requirements": {
+        "Essays": "Essay 1: Tell us about your career goals and why you want to pursue a MBA at Harvard University. (500 words)\n\nEssay 2: Describe a challenge you've faced and how you overcame it. How did this experience shape your leadership style? (400 words)",
+        "Letter of Recommendations": "1 Letters of Recommendation (1 Academic and 1 Professional)",
+        "Resume": "Required",
+        "Transcripts": "Required",
+        "Test Scores": "GMAT/GRE required",
+        "Interview": "By invitation only"
+      }
+    }
+  },
+  {
+    "universityName": "Stanford University",
+    "data": {
+      "University": "Stanford University",
+      "Location": "USA",
+      "Program": "MBA",
+      "Intake": "Fall, Spring",
+      "Duration": "24 Months",
+      "Tuition Fees": "USD 139,491",
+      "GMAT/GRE Waiver": "No",
+      "Recommended Scores": {
+        "Recommended GMAT": 712,
+        "Recommended GRE": 396
+      },
+      "Eligibility": "Minimum 2 years of work experience, Bachelor's degree with minimum GPA of 3.0",
+      "Eligibility URL": "https://www.stanford.edu/programs/mba/admissions/eligibility",
+      "Class Profile": {
+        "Average Work Experience": "3 Years",
+        "Average GRE Score": 316,
+        "Average GPA": "3.94",
+        "Average GMAT Score": 718,
+        "Average Age": 27
+      },
+      "Class Profile URL": "https://www.stanford.edu/programs/mba/class-profile",
+      "Employment Statistics": {
+        "Consulting": "$105623",
+        "Finance": "$113701",
+        "Marketing": "$87322",
+        "Information Technology": "$98447",
+        "Average Salary (in $)": "$101273",
+        "ROI (3 years avg. salary/Total tuition fee)": "217%"
+      },
+      "Deadlines": "Round 1: October 11, Round 2: January 10, Round 3: March 3",
+      "Application Requirements": {
+        "Essays": "Essay 1: Tell us about your career goals and why you want to pursue a MBA at Stanford University. (500 words)\n\nEssay 2: Describe a challenge you've faced and how you overcame it. How did this experience shape your leadership style? (400 words)",
+        "Letter of Recommendations": "1 Letters of Recommendation",
+        "Resume": "Required",
+        "Transcripts": "Required",
+        "Test Scores": "GMAT/GRE required",
+        "Interview": "By invitation only"
+      }
+    }
+  },
+  {
+    "universityName": "MIT - Sloan School of Business",
+    "data": {
+      "University": "MIT - Sloan School of Business",
+      "Location": "USA",
+      "Program": "MBA",
+      "Intake": "September, January",
+      "Duration": "21 Months",
+      "Tuition Fees": "USD 147,616",
+      "GMAT/GRE Waiver": "Yes",
+      "Recommended Scores": {
+        "Recommended GMAT": 680,
+        "Recommended GRE": 392
+      },
+      "Eligibility": "Minimum 2 years of work experience, Bachelor's degree with minimum GPA of 3.0",
+      "Eligibility URL": "https://www.mit.edu/programs/mba/admissions/eligibility",
+      "Class Profile": {
+        "Average Work Experience": "4 Years",
+        "Average GRE Score": 318,
+        "Average GPA": "3.33",
+        "Average GMAT Score": 685,
+        "Average Age": 26
+      },
+      "Class Profile URL": "https://www.mit.edu/programs/mba/class-profile",
+      "Employment Statistics": {
+        "Consulting": "$106603",
+        "Finance": "$97294",
+        "Marketing": "$94352",
+        "Information Technology": "$91934",
+        "Average Salary (in $)": "$97545",
+        "ROI (3 years avg. salary/Total tuition fee)": "198%"
+      },
+      "Deadlines": "Round 1: October 15, Round 2: January 9, Round 3: March 12",
+      "Application Requirements": {
+        "Essays": "Essay 1: Tell us about your career goals and why you want to pursue a MBA at MIT - Sloan School of Business. (500 words)\n\nEssay 2: Describe a challenge you've faced and how you overcame it. How did this experience shape your leadership style? (400 words)",
+        "Letter of Recommendations": "2 Letters of Recommendation",
+        "Resume": "Required",
+        "Transcripts": "Required",
+        "Test Scores": "GMAT/GRE (can be waived)",
+        "Interview": "By invitation only"
+      }
+    }
+  }
+]
