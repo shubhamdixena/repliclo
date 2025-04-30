@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "wouter";
+import { Link, useNavigate } from "react-router-dom";
 import { 
   DropdownMenu,
   DropdownMenuTrigger,
@@ -9,20 +9,49 @@ import {
 import { ChevronDown } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { signOut } from "@/lib/supabase";
+import { useToast } from "@/hooks/use-toast";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { user } = useAuth();
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   const handleSignOut = async () => {
-    await signOut();
+    try {
+      const { error } = await signOut();
+      if (error) {
+        toast({
+          title: "Error",
+          description: error.message,
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      // Show success toast
+      toast({
+        title: "Signed Out",
+        description: "You have been successfully signed out.",
+      });
+      
+      // Navigate to home page
+      navigate('/');
+    } catch (err) {
+      console.error('Sign out error:', err);
+      toast({
+        title: "Error",
+        description: "Failed to sign out. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white shadow-sm">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center">
-          <Link href="/" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <div className="flex items-center space-x-2">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 44" className="h-6" aria-label="charity: water">
                 <path d="M28.5,27.1h-21v-2.2c0-1.6,1-2.2,2.3-2.2h16.4c1.3,0,2.3,0.6,2.3,2.2V27.1z M26.2,2.9c-3.2,0-5.5,1.9-5.5,5.8 s2.3,5.8,5.5,5.8s5.5-1.9,5.5-5.8S29.4,2.9,26.2,2.9 M26.2,17.5c-5.6,0-9.1-3.6-9.1-8.8s3.4-8.8,9.1-8.8s9.1,3.6,9.1,8.8 S31.8,17.5,26.2,17.5 M9.8,17.5C4.2,17.5,0.8,14,0.8,8.8s3.4-8.8,9.1-8.8s9.1,3.6,9.1,8.8S15.4,17.5,9.8,17.5 M9.8,2.9 c-3.2,0-5.5,1.9-5.5,5.8s2.3,5.8,5.5,5.8s5.5-1.9,5.5-5.8S13,2.9,9.8,2.9 M35.2,27.1v3.7H0.8v-3.7H35.2z"></path>
@@ -33,8 +62,8 @@ const Header = () => {
           </Link>
         </div>
         
-        <nav className="hidden md:flex items-center">
-          <div className="relative group px-3">
+        <nav className="hidden md:flex items-center space-x-6">
+          <div className="relative group">
             <DropdownMenu>
               <DropdownMenuTrigger className="px-0 py-2 flex items-center text-xs uppercase font-semibold tracking-wider text-gray-800">
                 take action
@@ -42,71 +71,19 @@ const Header = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem>
-                  <Link href="#">Give</Link>
+                  <Link to="/donate">Give</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Link href="#">Join the Spring</Link>
+                  <Link to="/spring">Join the Spring</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Link href="#">Fundraise</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="#">Legacy Giving</Link>
+                  <Link to="/fundraise">Fundraise</Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          
-          <div className="relative group px-3">
-            <DropdownMenu>
-              <DropdownMenuTrigger className="px-0 py-2 flex items-center text-xs uppercase font-semibold tracking-wider text-gray-800">
-                get involved
-                <ChevronDown className="h-3 w-3 ml-1" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem>
-                  <Link href="/scholarships">Scholarships</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="#">Fundraise</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="#">Tiny Heroes</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="#">Students & Teachers</Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-          
-          <div className="relative group px-3">
-            <DropdownMenu>
-              <DropdownMenuTrigger className="px-0 py-2 flex items-center text-xs uppercase font-semibold tracking-wider text-gray-800">
-                get to know us
-                <ChevronDown className="h-3 w-3 ml-1" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem>
-                  <Link href="/about">About Us</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="#">Our Work</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="#">100% Model</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="#">Meet the Founder</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="#">Careers</Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-          
-          <div className="relative group px-3">
+
+          <div className="relative group">
             <DropdownMenu>
               <DropdownMenuTrigger className="px-0 py-2 flex items-center text-xs uppercase font-semibold tracking-wider text-gray-800">
                 why water?
@@ -114,25 +91,57 @@ const Header = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem>
-                  <Link href="#">Health</Link>
+                  <Link to="/why-water">Learn More</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Link href="#">Education</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="#">Women</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="#">Economic Growth</Link>
+                  <Link to="/solutions">Our Solutions</Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
+
+          <div className="relative group">
+            <DropdownMenu>
+              <DropdownMenuTrigger className="px-0 py-2 flex items-center text-xs uppercase font-semibold tracking-wider text-gray-800">
+                about us
+                <ChevronDown className="h-3 w-3 ml-1" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem>
+                  <Link to="/about">Our Story</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link to="/team">Our Team</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link to="/careers">Careers</Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+          {user ? (
+            <div className="flex items-center space-x-4">
+              <Link to="/dashboard" className="text-xs uppercase font-semibold tracking-wider text-gray-800">
+                Dashboard
+              </Link>
+              <button
+                onClick={handleSignOut}
+                className="text-xs uppercase font-semibold tracking-wider text-gray-800"
+              >
+                Sign Out
+              </button>
+            </div>
+          ) : (
+            <Link to="/login" className="text-xs uppercase font-semibold tracking-wider text-gray-800">
+              Sign In
+            </Link>
+          )}
         </nav>
         
         <div className="flex items-center space-x-4">
           <Link
-            href="#"
+            to="#"
             className="px-4 py-1.5 bg-charity-yellow text-charity-black text-xs font-bold rounded-full"
           >
             GIVE
@@ -147,7 +156,7 @@ const Header = () => {
             </button>
           ) : (
             <Link
-              href="/login"
+              to="/login"
               className="px-4 py-1.5 bg-gray-100 text-gray-800 hover:bg-gray-200 text-xs font-bold rounded-full"
             >
               LOGIN
@@ -173,7 +182,7 @@ const Header = () => {
             <div className="block px-3 py-2 text-sm font-medium text-gray-800">TAKE ACTION</div>
             <div className="block px-3 py-2 text-sm font-medium text-gray-800">GET INVOLVED</div>
             <div className="block px-3 py-2 text-sm font-medium text-gray-800">GET TO KNOW US</div>
-            <Link href="/about" className="block px-6 py-2 text-sm font-medium text-gray-600 pl-6">About Us</Link>
+            <Link to="/about" className="block px-6 py-2 text-sm font-medium text-gray-600 pl-6">About Us</Link>
             <div className="block px-3 py-2 text-sm font-medium text-gray-800">WHY WATER?</div>
             {user ? (
               <button
@@ -184,7 +193,7 @@ const Header = () => {
               </button>
             ) : (
               <Link
-                href="/login"
+                to="/login"
                 className="block px-3 py-2 text-sm font-medium text-gray-800"
               >
                 LOGIN

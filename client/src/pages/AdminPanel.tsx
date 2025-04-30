@@ -1,165 +1,69 @@
-import { useEffect, useState } from 'react';
-import { useLocation } from 'wouter';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { useBlogs, useCreateBlog, useUpdateBlog, useDeleteBlog } from '@/hooks/use-blogs';
-import type { Blog } from '@/types/blog';
-import { Loader2 } from 'lucide-react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import AdminLayout from '@/components/admin/AdminLayout';
+import Dashboard from './admin/Dashboard';
+import BlogPostList from '@/components/admin/BlogPostList';
+import BlogPostEditor from '@/components/admin/BlogPostEditor';
+import Categories from './admin/Categories';
+import Tags from './admin/Tags';
+import Media from './admin/Media';
 
-export default function AdminPanel() {
-  const [, setLocation] = useLocation();
-  const { user } = useAuth();
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [editingBlog, setEditingBlog] = useState<Blog | null>(null);
+interface BlogPost {
+  id: string;
+  title: string;
+  content: string;
+  featured_image?: string;
+  published: boolean;
+  created_at: string;
+  updated_at: string;
+}
 
-  const { data: blogs, isLoading } = useBlogs();
-  const createBlogMutation = useCreateBlog();
-  const updateBlogMutation = useUpdateBlog();
-  const deleteBlogMutation = useDeleteBlog();
+const AdminPanel = () => {
+  const { isAdmin, loading, user } = useAuth();
+  const navigate = useNavigate();
 
-  // Check for admin access
   useEffect(() => {
-    if (user?.email !== 'admin@gmail.com') {
-      setLocation('/login');
+    if (!loading && (!user || !isAdmin)) {
+      navigate('/');
     }
-  }, [user, setLocation]);
+  }, [loading, user, isAdmin, navigate]);
 
-  // If not admin, show access denied
-  if (!user || user.email !== 'admin@gmail.com') {
+  if (loading) {
     return (
-      <div className="container mx-auto p-8">
-        <Card>
-          <CardHeader>
-            <CardTitle>Access Denied</CardTitle>
-            <CardDescription>
-              Please login with an admin account to access the admin panel.
-            </CardDescription>
-          </CardHeader>
-        </Card>
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+          <p className="text-gray-600">Loading admin panel...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isAdmin) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-red-600">Access Denied</h1>
+          <p className="text-gray-600 mt-2">Admin privileges required to access this page.</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto p-8">
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle>{editingBlog ? 'Edit Blog Post' : 'Create New Blog Post'}</CardTitle>
-          <CardDescription>
-            Fill in the details below to {editingBlog ? 'update the' : 'create a new'} blog post.
-          </CardDescription>
-        </CardHeader>
-        <form onSubmit={handleSubmit}>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <label htmlFor="title" className="text-sm font-medium">Title</label>
-              <Input
-                id="title"
-                placeholder="Enter blog title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="content" className="text-sm font-medium">Content</label>
-              <Textarea
-                id="content"
-                placeholder="Write your blog content here..."
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                required
-                rows={5}
-              />
-            </div>
-          </CardContent>
-          <CardFooter className="flex gap-2">
-            <Button 
-              type="submit" 
-              disabled={createBlogMutation.isPending || updateBlogMutation.isPending}
-            >
-              {(createBlogMutation.isPending || updateBlogMutation.isPending) && (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              )}
-              {editingBlog ? 'Update' : 'Create'} Blog
-            </Button>
-            {editingBlog && (
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => {
-                  setEditingBlog(null);
-                  setTitle('');
-                  setContent('');
-                }}
-              >
-                Cancel Edit
-              </Button>
-            )}
-          </CardFooter>
-        </form>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Blog Posts</CardTitle>
-          <CardDescription>Manage your existing blog posts</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {isLoading ? (
-            <div className="flex justify-center p-4">
-              <Loader2 className="h-6 w-6 animate-spin" />
-            </div>
-          ) : !blogs?.length ? (
-            <p className="text-center text-muted-foreground">No blog posts found.</p>
-          ) : (
-            blogs.map((blog) => (
-              <Card key={blog.id}>
-                <CardHeader>
-                  <CardTitle>{blog.title}</CardTitle>
-                  <CardDescription>
-                    Created at: {new Date(blog.created_at).toLocaleDateString()}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">{blog.content}</p>
-                </CardContent>
-                <CardFooter className="flex gap-2">
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => handleEdit(blog)}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="destructive"
-                    onClick={() => handleDelete(blog.id)}
-                    disabled={deleteBlogMutation.isPending}
-                  >
-                    {deleteBlogMutation.isPending && (
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    )}
-                    Delete
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))
-          )}
-        </CardContent>
-      </Card>
-    </div>
+    <AdminLayout>
+      <Routes>
+        <Route path="/admin" element={<Dashboard />} />
+        <Route path="/admin/posts" element={<BlogPostList onEdit={() => {}} onNew={() => {}} />} />
+        <Route path="/admin/posts/new" element={<BlogPostEditor onSave={() => navigate('/admin/posts')} onCancel={() => navigate('/admin/posts')} />} />
+        <Route path="/admin/posts/:id" element={<BlogPostEditor onSave={() => navigate('/admin/posts')} onCancel={() => navigate('/admin/posts')} />} />
+        <Route path="/admin/categories" element={<Categories />} />
+        <Route path="/admin/tags" element={<Tags />} />
+        <Route path="/admin/media" element={<Media />} />
+      </Routes>
+    </AdminLayout>
   );
-}
+};
+
+export default AdminPanel;

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'wouter';
+import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Import the provided assets
@@ -82,9 +82,12 @@ const ActionSection = () => {
                     <p className="text-gray-300 mb-8">
                       Support clean water projects by raising funds for people in need.
                     </p>
-                    <button className="px-6 py-3 bg-charity-yellow text-charity-black text-sm font-bold rounded">
+                    <Link
+                      to="/fundraise"
+                      className="px-6 py-3 bg-charity-yellow text-charity-black text-sm font-bold rounded"
+                    >
                       GET STARTED
-                    </button>
+                    </Link>
                   </div>
                   <ActionCard 
                     image={giveFundraiserImage}
@@ -123,9 +126,12 @@ const ActionSection = () => {
                     <p className="mb-8">
                       Be part of our monthly giving community changing thousands of lives each month.
                     </p>
-                    <button className="px-6 py-3 bg-white text-charity-teal text-sm font-bold rounded">
+                    <Link
+                      to="/donate"
+                      className="px-6 py-3 bg-white text-charity-teal text-sm font-bold rounded"
+                    >
                       LEARN MORE
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>

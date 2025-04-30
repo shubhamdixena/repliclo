@@ -1,51 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
-
+@import './styles/fonts.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Base font configuration */
-@layer base {
-  html {
-    font-family: 'Proxima Nova', system-ui, sans-serif;
-  }
-}
-
-@font-face {
-  font-family: 'Kazimir';
-  src: url('https://assets.website-files.com/5c5b09b82f637d3c5c02003a/5c5b09b82f637d02fd020063_KazimirText-Book.woff2') format('woff2'),
-       url('https://assets.website-files.com/5c5b09b82f637d3c5c02003a/5c5b09b82f637d2066020064_KazimirText-Book.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Kazimir';
-  src: url('https://assets.website-files.com/5c5b09b82f637d3c5c02003a/5c5b09b82f637d6afd02005d_KazimirText-Bold.woff2') format('woff2'),
-       url('https://assets.website-files.com/5c5b09b82f637d3c5c02003a/5c5b09b82f637dd3e702005e_KazimirText-Bold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Proxima Nova';
-  src: url('https://assets.website-files.com/5c5b09b82f637d3c5c02003a/5c5b09b82f637d23e5020067_ProximaNova-Regular.woff2') format('woff2'),
-       url('https://assets.website-files.com/5c5b09b82f637d3c5c02003a/5c5b09b82f637d1f5002006a_ProximaNova-Regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Proxima Nova';
-  src: url('https://assets.website-files.com/5c5b09b82f637d3c5c02003a/5c5b09b82f637d66b3020065_ProximaNova-Bold.woff2') format('woff2'),
-       url('https://assets.website-files.com/5c5b09b82f637d3c5c02003a/5c5b09b82f637d0cb0020068_ProximaNova-Bold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
 
 :root {
   /* Base colors */
@@ -107,12 +63,11 @@
   }
 
   body {
-    @apply font-proxima antialiased bg-background text-foreground;
+    @apply bg-white text-gray-900 min-h-screen;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-kazimir;
-    font-weight: 400 !important;
+    @apply font-sans;
   }
 }
 
@@ -127,6 +82,14 @@
   
   .donation-option.selected {
     @apply bg-charity-yellow text-charity-black border-charity-yellow;
+  }
+  
+  .prose {
+    @apply max-w-none;
+  }
+  
+  .prose img {
+    @apply rounded-lg shadow-md;
   }
 }
 

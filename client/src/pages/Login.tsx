@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useLocation } from 'wouter';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { signInWithEmail, signUpWithEmail } from '@/lib/supabase';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
@@ -9,24 +9,24 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Loader2 } from 'lucide-react';
 
 const Login = () => {
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { user } = useAuth();
+  const { user, isAdmin, loading: authLoading } = useAuth();
   const { toast } = useToast();
 
-  // If user is already logged in, redirect them
-  if (user) {
-    if (user.email === 'admin@gmail.com') {
-      setLocation('/admin');
-    } else {
-      setLocation('/');
+  // Redirect to admin if already logged in as admin
+  useEffect(() => {
+    if (!authLoading && user && isAdmin) {
+      navigate('/admin', { replace: true });
     }
-    return null;
-  }
+    if (!authLoading && user && !isAdmin) {
+      navigate('/', { replace: true });
+    }
+  }, [user, isAdmin, authLoading, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,16 +43,26 @@ const Login = () => {
         throw response.error;
       }
 
-      // Clear form on success - AuthContext will handle navigation
       setEmail('');
       setPassword('');
-      
       toast({
         title: isLogin ? "Login Successful" : "Account Created",
         description: isLogin ? "You have been signed in." : "Your account has been created successfully.",
       });
+
+      // Wait for AuthContext to update before navigating
+      const authCheckInterval = setInterval(() => {
+        if (!authLoading && user) {
+          clearInterval(authCheckInterval);
+          if (isAdmin) {
+            navigate('/admin', { replace: true });
+          } else {
+            navigate('/', { replace: true });
+          }
+        }
+      }, 50); // Check every 50ms
+
     } catch (err: any) {
-      console.error('Auth error:', err);
       if (!navigator.onLine) {
         setError('No internet connection. Please check your network and try again.');
         toast({
